@@ -34,7 +34,6 @@ namespace MultiTool
         public static string DateTimeFormat { get { return DateFormat + " " + TimeFormat; } }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Дата отсчёта времени UNIX эпохи
         public static string Guid { get { return System.Guid.NewGuid().ToString().Replace("-", ""); } } // генератор уникальной строки (используется как соль)
 
         /// <summary>
