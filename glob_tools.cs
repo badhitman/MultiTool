@@ -54,6 +54,23 @@ namespace MultiTool
         /// </summary>
         public static string ExeDir => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+        public static double GetDoubleFromString(string conv_data)
+        {
+            if (string.IsNullOrWhiteSpace(conv_data))
+                return 0;
+
+            if (conv_data.Contains(".") || conv_data.Contains(","))
+                conv_data = conv_data + "0";
+
+            conv_data = conv_data.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            double ret_val;
+            if (!double.TryParse(conv_data, NumberStyles.AllowDecimalPoint, CultureInfo.CurrentCulture, out ret_val))
+                return 0;
+
+            return ret_val;
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// Сериализует объект в JSON строку
