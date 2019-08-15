@@ -60,7 +60,10 @@ namespace MultiTool
                 return 0;
 
             if (conv_data.Contains(".") || conv_data.Contains(","))
-                conv_data = conv_data + "0";
+                conv_data += "0";
+
+            if (conv_data.Substring(0, 1) == ".")
+                conv_data = "0" + conv_data;
 
             conv_data = conv_data.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
