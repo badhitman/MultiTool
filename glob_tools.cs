@@ -34,7 +34,7 @@ namespace MultiTool
         public static string DateTimeFormat { get { return DateFormat + " " + TimeFormat; } }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static string Guid { get { return System.Guid.NewGuid().ToString().Replace("-", ""); } } // генератор уникальной строки (используется как соль)
+        public static string Guid { get { return System.Guid.NewGuid().ToString().Replace("-", ""); } } // генератор уникальной строки
 
         /// <summary>
         /// Преобразование строки 16-ричного числа в целое число
@@ -59,11 +59,13 @@ namespace MultiTool
             if (string.IsNullOrWhiteSpace(conv_data))
                 return 0;
 
-            if (conv_data.Contains(".") || conv_data.Contains(","))
-                conv_data += "0";
+            int count_digt_separators = (conv_data.Split(".").Length - 1) + (conv_data.Split(",").Length - 1);
 
-            if (conv_data.Substring(0, 1) == ".")
-                conv_data = "0" + conv_data;
+            if (count_digt_separators > 1)
+                return 0;
+
+            if (count_digt_separators == 1)
+                conv_data = "0" + conv_data + "0";
 
             conv_data = conv_data.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
@@ -281,11 +283,11 @@ namespace MultiTool
             if (FileExtension.LastIndexOf(".") != FileExtension.IndexOf("."))
                 FileExtension = FileExtension.Substring(FileExtension.LastIndexOf("."));
 
-            return 
-                FileExtension.EndsWith(".jpg") || 
-                FileExtension.EndsWith(".jpeg") || 
-                FileExtension.EndsWith(".png") || 
-                FileExtension.EndsWith(".gif") || 
+            return
+                FileExtension.EndsWith(".jpg") ||
+                FileExtension.EndsWith(".jpeg") ||
+                FileExtension.EndsWith(".png") ||
+                FileExtension.EndsWith(".gif") ||
                 FileExtension.EndsWith(".bmp");
         }
     }
