@@ -59,7 +59,7 @@ namespace MultiTool
             if (string.IsNullOrWhiteSpace(conv_data))
                 return 0;
 
-            int count_digt_separators = (conv_data.Split(".").Length - 1) + (conv_data.Split(",").Length - 1);
+            int count_digt_separators = (conv_data.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries).Length - 1) + (conv_data.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Length - 1);
 
             if (count_digt_separators > 1)
                 return 0;
